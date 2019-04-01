@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import Layout from './Layout/Layout.js';
 import styled from 'styled-components';
-
 import Logo from './Components/Logo/Logo';
 import AboutButton from './Components/AboutButton/AboutButton'
 import Search from './Components/Search/Search';
 import AboutPage from './Components/AboutPage/AboutPage';
-
 import Images from './Components/Images/Images';
+
 import { connect } from 'react-redux';
 import { AboutPageVisible } from './actions/ApiRequest';
 
@@ -32,15 +31,14 @@ const WrapperForSearch = styled.div`
 
 class App extends Component {
   render() {
-    
-    const { stateOfApp, AboutPageVisibleStan } = this.props;
-    console.log(AboutPageVisibleStan);
+
+    const { stateOfApp, AboutPageVisibleStan, AboutPageVisible } = this.props;
 
     return (
       <>
         <Layout>
           <Logo stateOfApp={stateOfApp}>SpacerX</Logo>
-          <AboutButton stateOfApp={stateOfApp} onClick={() => this.props.AboutPageVisible2(true)}>About app</AboutButton>
+          <AboutButton stateOfApp={stateOfApp} onClick={() => AboutPageVisible(true)}>About app</AboutButton>
           <MainWrapper>
             <WrapperForSearch stateOfApp={stateOfApp}>
               <Search/>
@@ -64,7 +62,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapActionToProps = {
-  AboutPageVisible2: AboutPageVisible,
+  AboutPageVisible: AboutPageVisible,
 }
 
 export default connect(mapStateToProps, mapActionToProps) (App);

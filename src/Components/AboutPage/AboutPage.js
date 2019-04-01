@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import bg from '../../img/bg.jpg';
+import bg from '../../img/bg.png';
 import Logo from '../Logo/Logo';
 import AboutButton from '../AboutButton/AboutButton';
+import media from '../../utlis/media';
 
 import { connect } from 'react-redux';
 import { AboutPageVisible } from '../../actions/ApiRequest';
-
-import media from '../../utlis/media';
 
 const WrapperAbout = styled.div`
   width: 100%;
@@ -130,17 +129,16 @@ const P = styled.p`
 
 
 class AboutPage extends Component{
-
-  func = () => {
-    this.props.zmien();
-  }
-
+  
   render(){
+
+    const { AboutPageVisible } = this.props;
+
     return(
       <>
         <WrapperAbout>
           <Logo>SpacerX</Logo>
-          <AboutButton onClick={() => this.props.AboutPageVisible2(false)}>Back</AboutButton>
+          <AboutButton onClick={() => AboutPageVisible(false)}>Back</AboutButton>
           <H1>Hello,</H1>
           <Text1>
             Aplikacja jest przeznaczona do oglądania zdjęć kosmosu oraz innych obiektów związanych ze zdjęciami satelitarnymi oraz bezpośrednio z NASA. Wpisujecie co chcielibyście zobaczyć (oczywiście po angielsku), a waszym oczom ukazują się zdjęcia o danym zapytaniu. Aplikacja została stworzona ponieważ chciałem doskonalić się jako Frontend Developer
@@ -151,7 +149,7 @@ class AboutPage extends Component{
           </Text2>
           <KontaktDiv>
             <P>Link do mojego GitHuba:</P>
-            <P>szymon qqqaz dfff . com / werjwkqr </P>
+            <P>Wkrótce dostępny</P>
           </KontaktDiv>
         </WrapperAbout>
       </> 
@@ -159,10 +157,14 @@ class AboutPage extends Component{
   }
 }
 
-const mapStateToProps = () => {}
+const mapStateToProps = () => {
+  return{
+    
+  }
+}
 
 const mapActionToProps = {
-  AboutPageVisible2: AboutPageVisible,
+  AboutPageVisible: AboutPageVisible,
 }
 
 export default connect(mapStateToProps, mapActionToProps) (AboutPage);

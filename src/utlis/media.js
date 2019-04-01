@@ -7,7 +7,7 @@ export const sizes = {
   phone: 400,
 };
 
-export default Object.keys(sizes).reduce((acc, label) => { //wartość początkowa to 0 potem przyjmuje inną, obrznie prztważany element
+export default Object.keys(sizes).reduce((acc, label) => {
   acc[label] = (...args) => css`
     @media (min-width: ${sizes[label]}px) {
       ${css(...args)}

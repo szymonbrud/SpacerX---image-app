@@ -1,9 +1,8 @@
 import React from 'react';
 import styled, { createGlobalStyle , ThemeProvider} from 'styled-components';
 import { theme } from '../utlis/theme';
-import bg from '../img/bg.jpg';
+import bg from '../img/bg.png';
 import media from '../utlis/media';
-
 
 const GlobalStyle = createGlobalStyle`
 

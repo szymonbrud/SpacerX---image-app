@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-
 import media from '../../utlis/media';
+
 
 import { connect } from 'react-redux';
 import { ApiRun, ApiTake, StateOfImageFunc } from '../../actions/ApiRequest';
@@ -69,31 +69,30 @@ const AnyPhotoP = styled(LoadingP)`
 `;
 
 class Search extends Component{
+
   confirm = (e) => {
-    let letter = e.key; //one letter
-    let stringLetters = e.target.value; //all straing
+    let letter = e.key;
+    let stringLetters = e.target.value;
     if(letter === 'Enter'){
-      console.log(stringLetters);
       this.props.onTakeApi(stringLetters);
       this.props.onLoading(true);
-      // this.props.onStanOfApp(0)
     }
   };
   
   render(){
 
-    const { stateOfApp } = this.props
+    const { stateOfApp, loading } = this.props
 
     return(
       <>
         <SearchWrapper>
           <H1 stateOfApp={stateOfApp}>What do you want to see in a cosmos?</H1>
-          <InputText stateOfApp={stateOfApp} onKeyUpCapture={this.confirm.bind(this)}></InputText>
+          <InputText stateOfApp={stateOfApp} onKeyUpCapture={this.confirm.bind(this)}/>
           {
-            this.props.loading ? <LoadingP stateOfApp={stateOfApp}>Loading...</LoadingP> : null
+            loading ? <LoadingP stateOfApp={stateOfApp}>Loading...</LoadingP> : null
           }
           {
-            this.props.stateOfApp === 2 && this.props.loading !== true ? 
+            stateOfApp === 2 && loading !== true ? 
               <AnyPhotoP >There isn’t any photo for your question</AnyPhotoP> : null
           }
         </SearchWrapper>
@@ -102,10 +101,8 @@ class Search extends Component{
   }
 }
 
-
-const mapStateToProps = (state, props) => {
+const mapStateToProps = (state) => {
   return{
-    products: state.products,
     myTab: state.ApiImages,
     loading: state.loading,
     stateOfApp: state.StateOfMyApp,

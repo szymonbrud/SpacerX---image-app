@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import bg from '../../img/bg.jpg';
+import bg from '../../img/bg.png';
 import media from '../../utlis/media';
 
 import { connect } from 'react-redux';
@@ -37,7 +37,6 @@ const PageLoad = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  /* box-sizing: border-box; */
   border: 1px solid #fff;
 
   ${media.phone`
@@ -75,12 +74,8 @@ const P = styled.div`
 `;
 
 const Page = styled.div`
-  /* width: 80vw;
-  height: 30vh; */
-  /* margin: 10px; */
   width: calc(100% + 2px);
   height: calc(100% + 2px);
-
   position: absolute;
   left: -1px;
   top: -1px;
@@ -150,8 +145,6 @@ const H1Div = styled.div`
   color: white;
   font-size: 1.3rem;
   margin-top: 4vh;
-
-  
 `;
 
 const PhotoLoadWrapper = styled.div`
@@ -177,7 +170,6 @@ const PhotoLoadWrapper = styled.div`
 const ImageAbout = styled.div`
   width: calc(100% + 2px);
   height: calc(100% + 2px);
-
   position: absolute;
   left: -1px;
   top: -1px;
@@ -211,7 +203,6 @@ const DescriptionText = styled.div`
 `;
 
 const CenterWrapper = styled.div`
-
   height: 88vh;
 
   @media (orientation: landscape) {
@@ -239,15 +230,14 @@ class Images extends Component {
 
   render(){
 
-    console.log(this.props.StateOfApp)
-
-    const { InfoAboutPhotoVisible, numberOfPhoto } = this.state;
+    const { InfoAboutPhotoVisible, numberOfPhoto, } = this.state;
+    const { StateOfApp, myTab } = this.props; 
 
     return(
       <>
-        <ImageWrapper StateOfApp={this.props.StateOfApp}>
+        <ImageWrapper StateOfApp={StateOfApp}>
           {
-            this.props.myTab.map((item, i) => 
+            myTab.map((item, i) => 
               <PageLoad key={i}>
                 <P>loading...</P>
                 <Page oneImage={item.links[0].href}>
@@ -268,18 +258,13 @@ class Images extends Component {
                     <CenterWrapper>
                       <PhotoLoadWrapper>
                         Loading...
-                        <ImageAbout bgImage={this.props.myTab[numberOfPhoto].links[0].href}/>
-                        {console.log(this.props.myTab[numberOfPhoto].data[0].description)}
+                        <ImageAbout bgImage={myTab[numberOfPhoto].links[0].href}/>
                       </PhotoLoadWrapper>
                       <DescriptionText>
-                        {this.props.myTab[numberOfPhoto].data[0].description}
+                        {myTab[numberOfPhoto].data[0].description}
                       </DescriptionText>
                     </CenterWrapper>
                   </WrapperInfo2>
-                  {/* <Logo>SpacerX</Logo>
-                  <WrapperImg bg={this.props.imagess[this.state.descrip]}></WrapperImg>
-                  <WrapperToText>{this.props.tab[this.state.descrip]}</WrapperToText>
-                  <Back onClick={() => this.showDescription()}>Back</Back> */}
                 </WrapperInfo>
               </> : null           
           }
@@ -296,8 +281,4 @@ const mapPropsToState = (state) => {
   }
 }
 
-const mapActionToState = {
-
-}
-
-export default connect(mapPropsToState, mapActionToState) (Images);
+export default connect(mapPropsToState) (Images);

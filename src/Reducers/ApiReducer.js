@@ -9,7 +9,6 @@ export function apiReducer(state = [], { type, payload }){
   }
 }
 
-
 export function loadingReducer(state = false, { type, payload }){
   switch(type){
     case LOADING: 

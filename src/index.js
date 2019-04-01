@@ -8,7 +8,6 @@ import thunk from 'redux-thunk';
 import { applyMiddleware, compose, createStore, combineReducers } from 'redux';
 // import { composeWithDevTools } from 'redux-devtools-extension';
 import { Provider } from 'react-redux';
-
 import { apiReducer, loadingReducer, StateOfImages, AboutPageReducer } from './Reducers/ApiReducer';
 
 const allReducers = combineReducers({
