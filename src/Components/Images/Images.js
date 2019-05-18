@@ -1,27 +1,27 @@
-import React, { Component } from 'react';
-import styled from 'styled-components';
-import bg from '../../img/bg.png';
-import media from '../../utlis/media';
+import React, { Component } from "react";
+import styled from "styled-components";
+import bg from "../../img/bg.png";
+import media from "../../utlis/media";
 
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
 library.add(faArrowLeft);
 
 const ImageWrapper = styled.div`
   width: 100%;
-  height: ${({StateOfApp}) => StateOfApp === 1 ? 80 : 0 }vh;
+  height: ${({ StateOfApp }) => (StateOfApp === 1 ? 80 : 0)}vh;
   overflow: auto;
-  transition: .5s;
+  transition: 0.5s;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border-top: ${({hei}) => hei ? 1 : 0}px solid black;
+  border-top: ${({ hei }) => (hei ? 1 : 0)}px solid black;
   flex-wrap: wrap;
   flex-direction: row;
 `;
@@ -56,7 +56,6 @@ const PageLoad = styled.div`
 `;
 
 const P = styled.div`
-
   display: flex;
   align-items: center;
   justify-content: center;
@@ -81,9 +80,9 @@ const Page = styled.div`
   top: -1px;
   z-index: 1000;
 
-  background-image: url(${({oneImage}) => oneImage});
+  background-image: url(${({ oneImage }) => oneImage});
   background-repeat: no-repeat;
-  background-size: 100% 100%;
+  background-size: cover;
 `;
 
 const PageW = styled.div`
@@ -91,11 +90,11 @@ const PageW = styled.div`
   height: 100%;
   background: black;
   opacity: 0;
-  transition: .2s;
+  transition: 0.2s;
 
-  :hover{
+  :hover {
     cursor: pointer;
-    opacity: .1;
+    opacity: 0.1;
   }
 `;
 
@@ -118,7 +117,7 @@ const WrapperInfo2 = styled.div`
   left: 0;
   width: 100%;
   height: 100vh;
-  background: rgba(0,0,0,.5);
+  background: rgba(0, 0, 0, 0.5);
 `;
 
 const I = styled.div`
@@ -149,7 +148,7 @@ const H1Div = styled.div`
 
 const PhotoLoadWrapper = styled.div`
   margin: 4vh 5% 0;
-  background: rgba(10, 10, 10, .7);
+  background: rgba(10, 10, 10, 0.7);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -166,7 +165,6 @@ const PhotoLoadWrapper = styled.div`
   }
 `;
 
-
 const ImageAbout = styled.div`
   width: calc(100% + 2px);
   height: calc(100% + 2px);
@@ -175,13 +173,13 @@ const ImageAbout = styled.div`
   top: -1px;
   z-index: 1000;
 
-  background-image: url(${({bgImage}) => bgImage});
+  background-image: url(${({ bgImage }) => bgImage});
   background-repeat: no-repeat;
-  background-size: 100% 100%;
+  background-size: cover;
 `;
 
 const DescriptionText = styled.div`
-  font-size: .8rem;
+  font-size: 0.8rem;
   color: white;
   margin: 3vh 5% 0;
   width: 90%;
@@ -206,79 +204,76 @@ const CenterWrapper = styled.div`
   height: 88vh;
 
   @media (orientation: landscape) {
-    display: flex;    
+    display: flex;
   }
 `;
 
 class Images extends Component {
-
-  constructor(){
+  constructor() {
     super();
 
     this.state = {
       InfoAboutPhotoVisible: false,
-      numberOfPhoto: Number,
-    }
+      numberOfPhoto: Number
+    };
   }
 
-  showDescription = (i) => {
+  showDescription = i => {
     this.setState({
       InfoAboutPhotoVisible: !this.state.InfoAboutPhotoVisible,
-      numberOfPhoto: i,
+      numberOfPhoto: i
     });
-  }
+  };
 
-  render(){
+  render() {
+    const { InfoAboutPhotoVisible, numberOfPhoto } = this.state;
+    const { StateOfApp, myTab } = this.props;
 
-    const { InfoAboutPhotoVisible, numberOfPhoto, } = this.state;
-    const { StateOfApp, myTab } = this.props; 
-
-    return(
+    return (
       <>
         <ImageWrapper StateOfApp={StateOfApp}>
-          {
-            myTab.map((item, i) => 
-              <PageLoad key={i}>
-                <P>loading...</P>
-                <Page oneImage={item.links[0].href}>
-                  <PageW onClick={() => this.showDescription(i)}/>
-                </Page>
-              </PageLoad>
-            )
-          }
-          {
-            InfoAboutPhotoVisible ?
-              <>
-                <WrapperInfo onClick={() => this.showDescription()} stateOf={InfoAboutPhotoVisible}>
-                  <WrapperInfo2>
-                    <I>
-                      <FontAwesomeIcon icon="arrow-left"/>
-                    </I>
-                    <H1Div>About this photo</H1Div>
-                    <CenterWrapper>
-                      <PhotoLoadWrapper>
-                        Loading...
-                        <ImageAbout bgImage={myTab[numberOfPhoto].links[0].href}/>
-                      </PhotoLoadWrapper>
-                      <DescriptionText>
-                        {myTab[numberOfPhoto].data[0].description}
-                      </DescriptionText>
-                    </CenterWrapper>
-                  </WrapperInfo2>
-                </WrapperInfo>
-              </> : null           
-          }
+          {myTab.map((item, i) => (
+            <PageLoad key={i}>
+              <P>loading...</P>
+              <Page oneImage={item.links[0].href}>
+                <PageW onClick={() => this.showDescription(i)} />
+              </Page>
+            </PageLoad>
+          ))}
+          {InfoAboutPhotoVisible ? (
+            <>
+              <WrapperInfo stateOf={InfoAboutPhotoVisible}>
+                <WrapperInfo2>
+                  <I onClick={() => this.showDescription()}>
+                    <FontAwesomeIcon icon="arrow-left" />
+                  </I>
+                  <H1Div>About this photo</H1Div>
+                  <CenterWrapper>
+                    <PhotoLoadWrapper>
+                      Loading...
+                      <ImageAbout
+                        bgImage={myTab[numberOfPhoto].links[0].href}
+                      />
+                    </PhotoLoadWrapper>
+                    <DescriptionText>
+                      {myTab[numberOfPhoto].data[0].description}
+                    </DescriptionText>
+                  </CenterWrapper>
+                </WrapperInfo2>
+              </WrapperInfo>
+            </>
+          ) : null}
         </ImageWrapper>
       </>
-    )
+    );
   }
 }
 
-const mapPropsToState = (state) => {
-  return{
+const mapPropsToState = state => {
+  return {
     myTab: state.ApiImages,
-    StateOfApp: state.StateOfMyApp,
-  }
-}
+    StateOfApp: state.StateOfMyApp
+  };
+};
 
-export default connect(mapPropsToState) (Images);
+export default connect(mapPropsToState)(Images);
